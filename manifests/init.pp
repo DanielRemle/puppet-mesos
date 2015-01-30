@@ -18,8 +18,8 @@
 # Copyright 2013-2014 Tomas Barton
 #
 class mesos(
-  $ensure         = 'present', # if version is not defined, ensure will be used
-  $version        = undef,
+  $ensure         = 'present',
+  $version        = undef, # if version is not defined, ensure will be used
   $log_dir        = '/var/log/mesos', # master and slave creates separate logs automatically # TODO: currently not used
   $conf_dir       = '/etc/mesos',
   $zookeeper      = '', # e.g. zk://localhost:2181/mesos # if "zk" is empty, master value is used
@@ -40,7 +40,7 @@ class mesos(
   }
 
   package {'mesos':
-    ensure      => $mesos_ensure,
+    ensure  => $mesos_ensure,
   }
 
   class {'mesos::config':
