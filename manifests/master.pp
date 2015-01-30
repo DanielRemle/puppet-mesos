@@ -37,7 +37,7 @@ class mesos::master(
     recurse => true,
     purge   => true,
     force   => true,
-    require => Class['::mesos::install'],
+    require => Package['::mesos::mesos'],
   }
 
   file { $work_dir:

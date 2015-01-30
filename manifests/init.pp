@@ -18,22 +18,16 @@
 # Copyright 2013-2014 Tomas Barton
 #
 class mesos(
-  $ensure         = 'present',
-  # if version is not defined, ensure will be used
+  $ensure         = 'present', # if version is not defined, ensure will be used
   $version        = undef,
-  # master and slave creates separate logs automatically
-  # TODO: currently not used
-  $log_dir        = '/var/log/mesos',
+  $log_dir        = '/var/log/mesos', # master and slave creates separate logs automatically # TODO: currently not used
   $conf_dir       = '/etc/mesos',
-  # e.g. zk://localhost:2181/mesos
-  $zookeeper      = '',
-  # if "zk" is empty, master value is used
+  $zookeeper      = '', # e.g. zk://localhost:2181/mesos # if "zk" is empty, master value is used
   $master         = '127.0.0.1',
   $master_port    = 5050,
   $owner          = 'root',
   $group          = 'root',
-  # could be a fact like $::ipaddress or explicit ip address
-  $listen_address = undef,
+  $listen_address = undef, # could be a fact like $::ipaddress or explicit ip address
   $repo           = undef,
   $env_var        = {},
   $ulimit         = 8192,
@@ -45,9 +39,8 @@ class mesos(
     default  => $version,
   }
 
-  class {'mesos::install':
+  package {'mesos':
     ensure      => $mesos_ensure,
-    repo_source => $repo,
   }
 
   class {'mesos::config':
@@ -58,7 +51,7 @@ class mesos(
     zookeeper => $zookeeper,
     env_var   => $env_var,
     ulimit    => $ulimit,
-    require   => Class['mesos::install']
+    require   => Package['::mesos::mesos']
   }
 
 }
