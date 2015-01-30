@@ -51,7 +51,7 @@ class mesos(
     zookeeper => $zookeeper,
     env_var   => $env_var,
     ulimit    => $ulimit,
-    require   => Package['::mesos::mesos']
+    require   => Package['mesos']
   }
 
 }
