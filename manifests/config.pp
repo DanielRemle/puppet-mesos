@@ -43,7 +43,7 @@ class mesos::config(
   }
 
   # file containing only zookeeper URL
-  file { '/etc/mesos/zk':
+  file { "${conf_dir}/zk":
     ensure  => empty($zookeeper) ? {
       true  => absent,
       false => present,
